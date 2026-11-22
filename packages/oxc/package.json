@@ -1,0 +1,68 @@
+{
+  "name": "@effect-kit/oxc",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Effect's oxlint rules and preset (unofficial fork of Effect's internal @effect/oxc)",
+  "homepage": "https://github.com/effect-kit/tools/tree/main/packages/oxc#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/effect-kit/tools.git",
+    "directory": "packages/oxc"
+  },
+  "bugs": {
+    "url": "https://github.com/effect-kit/tools/issues"
+  },
+  "keywords": [
+    "effect",
+    "oxc",
+    "oxlint",
+    "lint",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "sideEffects": [],
+  "exports": {
+    "./package.json": "./package.json",
+    "./oxlint": "./src/oxlint/index.ts",
+    "./oxlint/rules/*": "./src/oxlint/rules/*.ts",
+    "./oxlintrc.json": "./oxlintrc.json"
+  },
+  "files": [
+    "oxlintrc.json",
+    "src/**/*.ts",
+    "dist/**/*.js",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.ts.map",
+    "NOTICE.md",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "exports": {
+      "./package.json": "./package.json",
+      "./oxlint": "./dist/oxlint/index.js",
+      "./oxlint/rules/*": "./dist/oxlint/rules/*.js",
+      "./oxlintrc.json": "./oxlintrc.json"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.json && pnpm babel",
+    "babel": "babel dist --plugins annotate-pure-calls --out-dir dist --source-maps",
+    "check": "tsc -b tsconfig.json"
+  },
+  "dependencies": {
+    "@oxlint/plugins": "^1.94.0",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "oxlint": "^1.94.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6"
+  }
+}
