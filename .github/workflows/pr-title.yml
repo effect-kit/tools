@@ -1,0 +1,13 @@
+name: PR title
+
+on:
+  # Only the title is read: nothing is checked out, installed or run.
+  pull_request_target: # zizmor: ignore[dangerous-triggers]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  title:
+    uses: effect-kit/.github/.github/workflows/pr-title.yml@v1

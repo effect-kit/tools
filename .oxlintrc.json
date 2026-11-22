@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "extends": ["./packages/oxc/oxlintrc.json"],
+  "ignorePatterns": [
+    "**/dist",
+    "**/build",
+    "**/coverage",
+    "**/*.tsbuildinfo",
+    "**/CHANGELOG.md",
+    "research/**",
+    "tmp/**",
+    "**/test/fixtures/**",
+    "!scratchpad/**/*",
+    "**/.*",
+    "!.agents",
+    "!.agents/**/*",
+    "!.changeset",
+    "!.changeset/**/*",
+    "!.github",
+    "!.github/**/*",
+    "!.gitignore",
+    "!.oxlintrc.json",
+    "!.vscode",
+    "!.vscode/**/*"
+  ],
+  "jsPlugins": ["@effect-kit/oxc/oxlint"],
+  "overrides": [{
+    "files": ["**/{test,scripts,scratchpad}/**", "packages/*/src/bin.ts", "packages/ai-docgen/src/main.ts"],
+    "rules": {
+      "effect/no-bigint-literals": "off",
+      "eslint/no-console": "off",
+      "effect/no-import-from-barrel-package": "off"
+    }
+  }]
+}

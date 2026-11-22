@@ -1,0 +1,5 @@
+rules:
+  # Actions are referenced by major version tags (`@v7`) kept current by Dependabot, not commit
+  # SHA pins, so tag references are expected.
+  unpinned-uses:
+    disable: true

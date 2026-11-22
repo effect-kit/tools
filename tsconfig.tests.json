@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  "references": [{ "path": "tsconfig.packages.json" }],
+  "include": [
+    "./vitest.*.ts",
+    "./scripts/**/*.ts",
+    "./packages/*/test/**/*.ts",
+    "./packages/*/test/**/*.json"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "./packages/*/test/fixtures/**"
+  ],
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "erasableSyntaxOnly": false,
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "paths": {
+      // Path aliases load workspace packages from source in tests, without a build.
+      "@effect-kit/ai-docgen/*": ["./packages/ai-docgen/src/*.ts"],
+      "@effect-kit/bundle/*": ["./packages/bundle/src/*.ts"],
+      "@effect-kit/codegen/*": ["./packages/codegen/src/*.ts"],
+      "@effect-kit/jsdocs": ["./packages/jsdocs/src/Jsdocs.ts"],
+      "@effect-kit/jsdocs/*": ["./packages/jsdocs/src/*.ts"],
+      "@effect-kit/oxc/oxlint": ["./packages/oxc/src/oxlint/index.ts"],
+      "@effect-kit/oxc/oxlint/rules/*": ["./packages/oxc/src/oxlint/rules/*.ts"]
+    },
+    "plugins": [{
+      "name": "@effect/language-service",
+      "effectFn": ["untraced"],
+      "namespaceImportPackages": [],
+      "includeSuggestionsInTsc": false,
+      "ignoreEffectWarningsInTscExitCode": true,
+      "ignoreEffectErrorsInTscExitCode": false,
+      "diagnosticSeverity": {
+        "unknownInEffectCatch": "off",
+        "multipleEffectProvide": "off",
+        "unstableApiUsage": "off",
+        "effectFnOpportunity": "error"
+      }
+    }]
+  }
+}

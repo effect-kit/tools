@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  static:
+    name: Static
+    # Version PRs are checked after merge and again before publication.
+    if: >-
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.user.login != 'github-actions[bot]' ||
+      github.event.pull_request.head.repo.full_name != github.repository ||
+      github.head_ref != 'changeset-release/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: effect-kit/.github/actions/setup@v1
+        with:
+          cache: pnpm
+      - run: pnpm lint
+      - run: pnpm circular
+
+  types:
+    name: Types
+    needs: static
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: effect-kit/.github/actions/setup@v1
+        with:
+          cache: pnpm
+      - run: pnpm check-tsc
+
+  build:
+    name: Build
+    needs: static
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: effect-kit/.github/actions/setup@v1
+        with:
+          cache: pnpm
+      - run: pnpm build
+      - run: pnpm check-dist-types
+
+  test:
+    name: Test (Node ${{ matrix.node || 'from .node-version' }})
+    needs: static
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        # Empty uses .node-version; 22.19.0 is the minimum in every package's `engines`.
+        node: ["", "22.19.0"]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: effect-kit/.github/actions/setup@v1
+        with:
+          cache: pnpm
+          node-version: ${{ matrix.node }}
+      - run: pnpm vitest run
+
+  zizmor:
+    name: Workflow audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # Annotations instead of code scanning: SARIF uploads would need `security-events: write`.
+      - uses: zizmorcore/zizmor-action@v0.8.1
+        with:
+          version: 1.32.0
+          config: .github/zizmor.yml
+          advanced-security: false
+          annotations: true

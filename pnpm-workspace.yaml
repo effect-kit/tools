@@ -1,0 +1,21 @@
+packages:
+  - scratchpad
+  - scripts
+  - packages/*
+
+verifyDepsBeforeRun: error
+enableGlobalVirtualStore: false
+# Refuse dependency versions published less than a day ago (minutes).
+minimumReleaseAge: 1440
+# Effect ships the language service, test helpers and runtime together; take its releases at once.
+minimumReleaseAgeExclude:
+  - effect
+  - "@effect/*"
+
+allowBuilds:
+  dprint: false
+  lefthook: true
+  esbuild: false
+
+patchedDependencies:
+  '@changesets/get-github-info@1.0.1': patches/@changesets__get-github-info@1.0.1.patch

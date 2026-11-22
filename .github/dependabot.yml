@@ -1,0 +1,31 @@
+version: 2
+updates:
+  # Workflows reference actions by major tag; this proposes new majors, grouped weekly.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    # Releases at least a week old, so a compromised release is likely found before it lands.
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns: ["*"]
+
+  # Effect is excluded from the cooldown, matching `minimumReleaseAgeExclude` in
+  # pnpm-workspace.yaml.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    versioning-strategy: increase
+    cooldown:
+      default-days: 1
+      exclude:
+        - "effect"
+        - "@effect/*"
+    groups:
+      effect:
+        patterns: ["effect", "@effect/*"]
+      dependencies:
+        patterns: ["*"]
