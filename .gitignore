@@ -33,7 +33,6 @@ stats.txt
 scratchpad/**/*
 
 # Agent instructions
-/AGENTS.md
 /packages/**/AGENTS.md
 /packages/**/CLAUDE.md
 /packages/**/ai-docs/

@@ -5,7 +5,9 @@ This repository publishes Effect's internal repository tools as `@effect-kit/*`.
 
 - `packages/<name>`: one published package per tool, vendored from `Effect-TS/effect` `packages/tools/*`. Each
   `NOTICE.md` names the upstream directory and commit, and lists every change from upstream.
-- `scripts/`: repository scripts; `scripts/release/` is the `release check|smoke` CLI the release workflow runs.
+- `scripts/`: the repository's tooling, one Effect CLI (`node scripts/bin.ts <command>`: `circular`, `clean`,
+  `dist-types`, `lint`, `release check|smoke`). Every script is a TypeScript command in `scripts/commands/`, with its
+  logic tested in `scripts/test/`; `pnpm lint` fails on JavaScript under `scripts/`.
 - `scratchpad/`: ad hoc probes (`scratchpad/<name>.ts`, run with plain `node`, deleted afterwards; ignored by git).
 - `.changeset/`: changesets. `.github/workflows/`: CI plus callers of the shared `effect-kit/.github` workflows.
 
@@ -23,7 +25,7 @@ This repository publishes Effect's internal repository tools as `@effect-kit/*`.
 | -------------------- | ------------------------------------------------------------------------- |
 | Package source       | `pnpm lint-fix`, targeted `pnpm test --run <test_file.ts>`, `pnpm check`  |
 | Package exports/bins | `pnpm build`, `pnpm check-dist-types`, then a local release check (below) |
-| Release CLI          | `pnpm test --run scripts`, `pnpm check`                                   |
+| Scripts CLI          | `pnpm test --run scripts`, `pnpm check`                                   |
 | Docs only            | `pnpm lint-fix`                                                           |
 
 `pnpm check` type-checks with tsrs; `pnpm check-tsc` runs the official `tsc` and is for CI. Never run bare

@@ -223,15 +223,9 @@ importers:
       effect:
         specifier: 4.1.5
         version: 4.1.5
-      glob:
-        specifier: 14.0.6
-        version: 14.0.6
       lefthook:
         specifier: 2.2.2
         version: 2.2.2
-      madge:
-        specifier: 8.0.0
-        version: 8.0.0(supports-color@7.2.0)(typescript@7.0.2)
       oxlint:
         specifier: 1.94.0
         version: 1.94.0
@@ -372,6 +366,16 @@ importers:
       effect:
         specifier: 4.1.5
         version: 4.1.5
+      glob:
+        specifier: 14.0.6
+        version: 14.0.6
+      madge:
+        specifier: 8.0.0
+        version: 8.0.0(supports-color@7.2.0)(typescript@5.9.3)
+    devDependencies:
+      '@types/madge':
+        specifier: 5.0.3
+        version: 5.0.3
 
 packages:
 
@@ -1526,6 +1530,9 @@ packages:
 
   '@types/jsesc@2.5.1':
     resolution: {integrity: sha512-9VN+6yxLOPLOav+7PwjZbxiID2bVaeq0ED4qSQmdQTdjnXJSaCVKTR58t15oqH1H5t8Ng2ZX1SabJVoN9Q34bw==}
+
+  '@types/madge@5.0.3':
+    resolution: {integrity: sha512-NlQJd0qRAoyu+pawTDhLxkW940QT2dqASfwd2g/xEZu2F4Xjwa7TVRSPdbmZwUF1ygvAh0/nepeN7JjwEuOXCA==}
 
   '@types/node@26.6.6':
     resolution: {integrity: sha512-MzQj+8Kx3XI40OmUAE6Qoh58ZMNstNNMwn2nfd3qWsfe7nDNSqJNzes4njhz6AHwrSHOffSLwXU6yb474Q4aog==}
@@ -4039,6 +4046,10 @@ snapshots:
 
   '@types/jsesc@2.5.1': {}
 
+  '@types/madge@5.0.3':
+    dependencies:
+      '@types/node': 26.6.6
+
   '@types/node@26.6.6':
     dependencies:
       undici-types: 8.9.0
@@ -4834,7 +4845,7 @@ snapshots:
 
   lru-cache@11.5.3: {}
 
-  madge@8.0.0(supports-color@7.2.0)(typescript@7.0.2):
+  madge@8.0.0(supports-color@7.2.0)(typescript@5.9.3):
     dependencies:
       chalk: 4.1.2
       commander: 7.2.0
@@ -4849,7 +4860,7 @@ snapshots:
       ts-graphviz: 2.1.6
       walkdir: 0.4.1
     optionalDependencies:
-      typescript: 7.0.2
+      typescript: 5.9.3
     transitivePeerDependencies:
       - '@typescript/native'
       - supports-color
