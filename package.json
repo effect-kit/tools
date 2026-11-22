@@ -16,7 +16,7 @@
     "lint": "oxlint -f unix && dprint check",
     "lint-fix": "oxlint --fix && dprint fmt",
     "changeset": "changeset",
-    "changeset-version": "changeset version && pnpm install --lockfile-only --ignore-scripts && dprint fmt",
+    "changeset-version": "changeset version && pnpm install --ignore-scripts --no-frozen-lockfile && dprint fmt",
     "ci:check": "pnpm lint && pnpm circular && pnpm check-tsc && vitest run && pnpm build && pnpm check-dist-types",
     "release:version": "pnpm changeset-version",
     "release:prepare": "pnpm ci:check",
