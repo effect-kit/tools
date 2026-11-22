@@ -1,6 +1,6 @@
 {
   "name": "@effect-kit/ai-docgen",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "description": "Builds an LLMS.md from a directory of runnable TypeScript docs (unofficial fork of Effect's internal @effect/ai-docgen)",
