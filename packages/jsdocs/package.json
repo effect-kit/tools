@@ -1,6 +1,6 @@
 {
   "name": "@effect-kit/jsdocs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "description": "Checks TSDoc against Effect's conventions and writes a JSON model of every API (unofficial fork of Effect's internal @effect/jsdocs)",

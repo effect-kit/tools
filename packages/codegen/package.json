@@ -1,6 +1,6 @@
 {
   "name": "@effect-kit/codegen",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "description": "Generates the @barrel sections of index.ts files (unofficial fork of Effect's internal @effect/utils)",
