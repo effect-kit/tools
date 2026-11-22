@@ -7,6 +7,7 @@
 !/.changeset/
 !/.envrc
 !/.github/
+!/.node-version
 !/.gitignore
 !/.oxlintrc.json
 !/.vscode/
