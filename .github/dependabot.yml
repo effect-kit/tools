@@ -24,6 +24,11 @@ updates:
       exclude:
         - "effect"
         - "@effect/*"
+    ignore:
+      # oxc and jsdocs need TypeScript 6: they use its JavaScript API, which TypeScript 7 does not
+      # have. TypeScript majors are moved by hand.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     groups:
       effect:
         patterns: ["effect", "@effect/*"]
